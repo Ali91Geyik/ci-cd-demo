@@ -32,4 +32,8 @@ public class HelloControllerTest {
         String response= restTemplate.getForObject("http://localhost:"+port+"/name", String.class);
         assertEquals("CI/CD Demo Application", response);
     }
+    public void versionShouldReturnTrue(){
+        String response= restTemplate.getForObject("http://localhost:"+port+"/version", String.class);
+        assertEquals("v1.0.0",response);
+    }
 }
