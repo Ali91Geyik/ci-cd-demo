@@ -18,4 +18,8 @@ public class HelloController {
     public String name(){
         return "CI/CD Demo Application";
     }
+    @GetMapping("/version")
+    public String getVersion(){
+        return "v1.0.0";
+    }
 }
