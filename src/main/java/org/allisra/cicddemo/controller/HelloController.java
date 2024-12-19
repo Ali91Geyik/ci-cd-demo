@@ -14,4 +14,8 @@ public class HelloController {
     public String status(){
         return "Application is running!";
     }
+    @GetMapping("/name")
+    public String name(){
+        return "CI/CD Demo Application";
+    }
 }
