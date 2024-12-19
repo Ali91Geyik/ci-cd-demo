@@ -18,7 +18,7 @@ public class HelloControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void HelloShouldReturnDefaultMessage(){
+    public void helloShouldReturnDefaultMessage(){
         String response = restTemplate.getForObject("http://localhost:"+port+"/hello", String.class);
         assertEquals("Hello CI/CD!", response);
     }
@@ -26,5 +26,10 @@ public class HelloControllerTest {
     public void statusShouldReturnUpMessage(){
         String response= restTemplate.getForObject("http://localhost:"+port+"/status", String.class);
         assertEquals("Application is running!",response);
+    }
+    @Test
+    public void nameShouldReturnDefaultMessage(){
+        String response= restTemplate.getForObject("http://localhost:"+port+"/name", String.class);
+        assertEquals("CI/CD Demo Application", response);
     }
 }
