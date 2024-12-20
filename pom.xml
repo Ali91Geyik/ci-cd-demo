@@ -32,7 +32,7 @@
         <sonar.projectKey>ci-cd-demo</sonar.projectKey>
         <sonar.projectName>ci-cd-demo</sonar.projectName>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.login>sqp_a99b7c6a448b518deca7a050093b9936189d303a</sonar.login>
+        <sonar.token>sqp_a99b7c6a448b518deca7a050093b9936189d303a</sonar.token>
     </properties>
     <dependencies>
         <dependency>
