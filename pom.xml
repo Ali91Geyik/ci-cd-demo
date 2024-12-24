@@ -13,24 +13,14 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ci-cd-demo</name>
     <description>ci-cd-demo</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+
     <properties>
         <java.version>17</java.version>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.login>sqp_639d82b7cebc8c1a2bae7866c4cbd958b8edf0e9</sonar.login>
+        <sonar.organization>ali91geyik</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectKey>Ali91Geyik_ci-cd-demo</sonar.projectKey>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,7 +30,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -54,6 +43,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- SonarQube Plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -65,13 +55,11 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
                 <executions>
-                    <!-- Test öncesi hazırlık -->
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!-- Test sonrası rapor oluşturma -->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -79,7 +67,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    <!-- Minimum test coverage kontrolü -->
                     <execution>
                         <id>check</id>
                         <goals>
@@ -105,5 +92,19 @@
         </plugins>
     </build>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.4.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.2.3</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
