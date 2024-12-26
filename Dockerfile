@@ -1,24 +1,19 @@
-# Build stage
-FROM maven:3.8.4-openjdk-17 AS build
-WORKDIR /app
-COPY . .
+# Build stage - Maven ile uygulamamızı derleyeceğiz
+FROM maven:3.8.4-openjdk-17 AS builder
+WORKDIR /build
+# Önce pom.xml'i kopyalayıp bağımlılıkları indiriyoruz
+COPY pom.xml .
+# Bağımlılıkları ayrı bir layer olarak önbelleğe alıyoruz
+RUN mvn dependency:go-offline
+
+# Kaynak kodları kopyalayıp build işlemini gerçekleştiriyoruz
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Run stage
-# Base image olarak JDK 17 kullanıyoruz
+# Run stage - Sadece runtime için gerekli olan JDK ve JAR dosyasını içerecek
 FROM openjdk:17-jdk-slim
-
-# Çalışma dizinini belirliyoruz
 WORKDIR /app
-
-# JAR dosyasının adını bir değişkene atıyoruz
-ARG JAR_FILE=target/*.jar
-
-# JAR dosyasını container'a kopyalıyoruz
-COPY ${JAR_FILE} application.jar
-
-# Uygulamanın çalışacağı portu belirliyoruz
+# Builder aşamasından JAR dosyasını kopyalıyoruz
+COPY --from=builder /build/target/*.jar app.jar
 EXPOSE 8080
-
-# Uygulamayı başlatıyoruz
-ENTRYPOINT ["java", "-jar", "application.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
