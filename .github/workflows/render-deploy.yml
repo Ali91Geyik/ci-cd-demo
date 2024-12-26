@@ -5,14 +5,16 @@ on:
     workflows: ["Docker CI"]
     types:
       - completed
-    branches:
-      - main
+  pull_request:
+    types: [closed]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
+    if: |
+      github.event.workflow_run.conclusion == 'success' ||
+      (github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
