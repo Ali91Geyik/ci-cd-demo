@@ -22,4 +22,9 @@ public class HelloController {
     public String getVersion(){
         return "v1.0.0";
     }
+
+    @GetMapping("/dummy")
+    public String dummyEndPoint(){
+        return "dummy";
+    }
 }
